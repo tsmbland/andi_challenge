@@ -4,6 +4,13 @@ from andi_funcs import preprocess_tracks
 import csv
 import os
 
+path = ''
+
+"""
+Functions
+
+"""
+
 
 def import_x(direc):
     t = csv.reader(open(direc, 'r'), delimiter=';', lineterminator='\n', quoting=csv.QUOTE_NONNUMERIC)
@@ -38,7 +45,7 @@ Import data
 """
 
 # Import x data
-tracks_1D, tracks_2D = import_x('challenge_for_scoring/task2.txt')
+tracks_1D, tracks_2D = import_x(path + '/task2.txt')
 
 """
 1D

@@ -12,7 +12,8 @@ CNN
 
 def conv_blocks(dimensions, blocks, length=None):
     """
-    Adapted from Granik paper
+    Convolutional blocks for exponent and classification analysis
+    Adapted from CNN described in Granik et al 2019 and Bai et al 2018
 
     """
 
@@ -100,6 +101,11 @@ def conv_blocks(dimensions, blocks, length=None):
 
 
 def conv_blocks_for_seg(dimensions, blocks, length=None):
+    """
+    Convolutional blocks used for segmentation
+    Unlike the conv_blocks function, this uses standard convolutions rather than causal convolutions
+
+    """
     inputs = Input((length, dimensions))
     f = 64
 
@@ -169,7 +175,7 @@ def conv_blocks_for_seg(dimensions, blocks, length=None):
 
 
 """
-Regression
+Exponent
 
 """
 

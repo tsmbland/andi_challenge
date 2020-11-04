@@ -4,6 +4,13 @@ from andi_funcs import preprocess_tracks
 import csv
 import os
 
+path = ''
+
+"""
+Functions
+
+"""
+
 
 def import_x(direc):
     t = csv.reader(open(direc, 'r'), delimiter=';', lineterminator='\n', quoting=csv.QUOTE_NONNUMERIC)
@@ -48,7 +55,8 @@ def split_tracks(tracks, positions, dimensions=1, max_T=200):
     if dimensions == 1:
         for j, track in enumerate(tracks):
             tracks_array[i, max_T - max(positions[j] - g, 0):, 0] = track[:max(positions[j] - g, 0)]
-            tracks_array[i + 1, min(positions[j] + g, 200):, 0] = track[min(positions[j] + g, 200):]
+            tracks_array[i + 1, min(positions[j] + g, 199):, 0] = track[min(positions[j] + g, 199):] - track[
+                min(positions[j] + g, 199)]
             i += 2
     elif dimensions == 2:
         for j, track in enumerate(tracks):
@@ -57,8 +65,10 @@ def split_tracks(tracks, positions, dimensions=1, max_T=200):
             d2 = track[len_t:].flatten() - track[len_t]
             tracks_array[i, max_T - max(positions[j] - g, 0):, 0] = d1[:max(positions[j] - g, 0)]
             tracks_array[i, max_T - max(positions[j] - g, 0):, 1] = d2[:max(positions[j] - g, 0)]
-            tracks_array[i + 1, min(positions[j] + g, 200):, 0] = d1[min(positions[j] + g, 200):]
-            tracks_array[i + 1, min(positions[j] + g, 200):, 1] = d2[min(positions[j] + g, 200):]
+            tracks_array[i + 1, min(positions[j] + g, 199):, 0] = d1[min(positions[j] + g, 199):] - d1[
+                min(positions[j] + g, 199)]
+            tracks_array[i + 1, min(positions[j] + g, 199):, 1] = d2[min(positions[j] + g, 199):] - d2[
+                min(positions[j] + g, 199)]
             i += 2
 
     # Preprocess
@@ -72,7 +82,7 @@ Import data
 """
 
 # Import x data
-tracks_1D, tracks_2D = import_x('challenge_for_scoring/task3.txt')
+tracks_1D, tracks_2D = import_x(path + '/task3.txt')
 tracks_1D_packaged = package_tracks(tracks_1D, dimensions=1, max_T=200)
 tracks_2D_packaged = package_tracks(tracks_2D, dimensions=2, max_T=200)
 
@@ -103,7 +113,7 @@ d1_res_1b[maxes < thresh] = d1_res1
 d1_res_1b[maxes > thresh] = d1_res2[1::2]
 
 # Exponent
-model = load_model('../Regression/Models/1D.h5')
+model = load_model('../Exponent/Models/1D.h5')
 d1_res1 = model.predict(tracks_1D_packaged[maxes < thresh]).flatten()
 d1_res2 = model.predict(split_tracks(np.array(tracks_1D)[maxes > thresh], positions_1D[maxes > thresh])).flatten()
 d1_res_2a = np.zeros(len(tracks_1D))
@@ -141,7 +151,7 @@ d2_res_1b[maxes < thresh] = d2_res1
 d2_res_1b[maxes > thresh] = d2_res2[1::2]
 
 # Exponent
-model = load_model('../Regression/Models/2D.h5')
+model = load_model('../Exponent/Models/2D.h5')
 d2_res1 = model.predict(tracks_2D_packaged[maxes < thresh]).flatten()
 d2_res2 = model.predict(
     split_tracks(np.array(tracks_2D)[maxes > thresh], positions_2D[maxes > thresh], dimensions=2)).flatten()

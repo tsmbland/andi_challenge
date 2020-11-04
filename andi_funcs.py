@@ -2,7 +2,7 @@ import numpy as np
 import andi
 
 """
-Regression
+Exponent
 
 """
 

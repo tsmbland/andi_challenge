@@ -4,6 +4,13 @@ from andi_funcs import preprocess_tracks
 import csv
 import os
 
+path = ''
+
+"""
+Functions
+
+"""
+
 
 def import_x(direc):
     t = csv.reader(open(direc, 'r'), delimiter=';', lineterminator='\n', quoting=csv.QUOTE_NONNUMERIC)
@@ -47,14 +54,14 @@ Import data
 """
 
 # Import x data
-tracks_1D, tracks_2D = import_x('challenge_for_scoring/task1.txt')
+tracks_1D, tracks_2D = import_x(path + '/task1.txt')
 
 """
 1D
 
 """
 
-model = load_model('../Regression/Models/1D.h5')
+model = load_model('../Exponent/Models/1D.h5')
 res_1D = model.predict(package_tracks(tracks_1D, dimensions=1, max_T=2001)).flatten()
 
 """
@@ -62,7 +69,7 @@ res_1D = model.predict(package_tracks(tracks_1D, dimensions=1, max_T=2001)).flat
 
 """
 
-model = load_model('../Regression/Models/2D.h5')
+model = load_model('../Exponent/Models/2D.h5')
 res_2D = model.predict(package_tracks(tracks_2D, dimensions=2, max_T=2001)).flatten()
 
 """
