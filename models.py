@@ -5,7 +5,7 @@ from tensorflow.keras.layers import Dense, BatchNormalization, Conv1D, Add, Inpu
 import tensorflow as tf
 
 """
-CNN
+Convolutional blocks
 
 """
 
@@ -13,7 +13,7 @@ CNN
 def conv_blocks(dimensions, blocks, length=None):
     """
     Convolutional blocks for exponent and classification analysis
-    Adapted from CNN described in Granik et al 2019 and Bai et al 2018
+    Adapted from CNN described in Granik et al 2019, based on architecture from Bai et al 2018
 
     """
 
@@ -175,7 +175,7 @@ def conv_blocks_for_seg(dimensions, blocks, length=None):
 
 
 """
-Exponent
+Task1_Exponent
 
 """
 
@@ -199,10 +199,10 @@ def regression_model_1d(blocks=(1, 2, 3, 4)):
 def regression_model_2d(blocks=(1, 2, 3, 4)):
     inputs = Input((None, 2))
 
-    # Convolutions
+    # Convolutions - run through twice, flipping x and y dimensions on second run
     c1 = GlobalMaxPooling1D()(conv_blocks(dimensions=2, blocks=blocks)(inputs))
     c2 = GlobalMaxPooling1D()(conv_blocks(dimensions=2, blocks=blocks)(reverse(inputs, axis=[2])))
-    c = tf.math.maximum(c1, c2)
+    c = tf.math.maximum(c1, c2)  # max pool outputs from the two passes
 
     # Dense layers
     dense = Dense(512, activation='relu')(c)
@@ -215,7 +215,7 @@ def regression_model_2d(blocks=(1, 2, 3, 4)):
 
 
 """
-Classification
+Task2_Classification
 
 """
 
@@ -239,10 +239,10 @@ def classification_model_1d(blocks=(1, 2, 3, 4)):
 def classification_model_2d(blocks=(1, 2, 3, 4)):
     inputs = Input((None, 2))
 
-    # Convolutions
+    # Convolutions - run through twice, flipping x and y dimensions on second run
     c1 = GlobalMaxPooling1D()(conv_blocks(dimensions=2, blocks=blocks)(inputs))
     c2 = GlobalMaxPooling1D()(conv_blocks(dimensions=2, blocks=blocks)(reverse(inputs, axis=[2])))
-    c = tf.math.maximum(c1, c2)
+    c = tf.math.maximum(c1, c2)  # max pool outputs from the two passes
 
     # Dense layers
     dense = Dense(512, activation='relu')(c)
@@ -255,7 +255,7 @@ def classification_model_2d(blocks=(1, 2, 3, 4)):
 
 
 """
-Segmentation
+Task3_Segmentation
 
 """
 
@@ -280,10 +280,10 @@ def segmentation_model_1d(blocks=(1, 2, 3, 4)):
 def segmentation_model_2d(blocks=(1, 2, 3, 4)):
     inputs = Input((199, 2))
 
-    # Convolutions
+    # Convolutions - run through twice, flipping x and y dimensions on second run
     c1 = conv_blocks_for_seg(dimensions=2, blocks=blocks, length=199)(inputs)
     c2 = conv_blocks_for_seg(dimensions=2, blocks=blocks, length=199)(reverse(inputs, axis=[2]))
-    c = tf.math.add(c1, c2)
+    c = tf.math.add(c1, c2)  # add outputs from the two passes
 
     # 1x1 filter
     con = Conv1D(512, 1, activation='relu')(c)
