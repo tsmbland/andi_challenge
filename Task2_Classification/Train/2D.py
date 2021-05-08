@@ -24,7 +24,7 @@ history = model.fit(track_generator_classification(dimensions=2, n=32, min_T=5, 
                     callbacks=[
                         ModelCheckpoint(filepath='../Models/2D.h5', monitor='val_accuracy',
                                         save_best_only=True, mode='max')],
-                    validation_data=(tracks_val, classes_val), use_multiprocessing=True, workers=16)
+                    validation_data=(tracks_val, classes_val), use_multiprocessing=False)
 
 # Save performance metrics
 np.savetxt('2D_accuracy.txt', history.history['accuracy'])

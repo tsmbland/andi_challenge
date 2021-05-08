@@ -12,7 +12,7 @@ import numpy as np
 
 # Load validation data
 tracks_val = package_tracks(import_tracks('../../Datasets/Validation/task3.txt')[0], dimensions=1, max_T=200)
-positions_val = import_labels('../../Datasets/Validation/ref3.txt')[0]
+positions_val = import_labels('../../Datasets/Validation/ref3.txt')[0] - 1
 tracks_test = package_tracks(import_tracks('../../Datasets/Test/task3.txt')[0], dimensions=1, max_T=200)
 
 # Run model
@@ -23,7 +23,7 @@ history = model.fit(track_generator_segmentation(dimensions=1, n=32), steps_per_
                     callbacks=[
                         ModelCheckpoint(filepath='../Models/1D.h5', monitor='val_accuracy', save_best_only=True,
                                         mode='max')],
-                    validation_data=(tracks_val, positions_val), use_multiprocessing=True, workers=16)
+                    validation_data=(tracks_val, positions_val), use_multiprocessing=False)
 
 # Save performance metrics
 np.savetxt('1D_accuracy.txt', history.history['accuracy'])

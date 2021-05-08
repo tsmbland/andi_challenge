@@ -24,7 +24,7 @@ history = model.fit(track_generator_regression(dimensions=1, n=32, min_T=5, max_
                     callbacks=[
                         ModelCheckpoint(filepath='../Models/1D.h5', monitor='val_mae', save_best_only=True,
                                         mode='min')],
-                    validation_data=(tracks_val, exponents_val), use_multiprocessing=True, workers=16)
+                    validation_data=(tracks_val, exponents_val), use_multiprocessing=False)
 
 # Save performance metrics
 np.savetxt('1D_mae.txt', history.history['mae'])
