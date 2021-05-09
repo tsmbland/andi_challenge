@@ -200,8 +200,9 @@ def regression_model_2d(blocks=(1, 2, 3, 4)):
     inputs = Input((None, 2))
 
     # Convolutions - run through twice, flipping x and y dimensions on second run
-    c1 = GlobalMaxPooling1D()(conv_blocks(dimensions=2, blocks=blocks)(inputs))
-    c2 = GlobalMaxPooling1D()(conv_blocks(dimensions=2, blocks=blocks)(reverse(inputs, axis=[2])))
+    conv = conv_blocks(dimensions=2, blocks=blocks)
+    c1 = GlobalMaxPooling1D()(conv(inputs))
+    c2 = GlobalMaxPooling1D()(conv(reverse(inputs, axis=[2])))
     c = tf.math.maximum(c1, c2)  # max pool outputs from the two passes
 
     # Dense layers
@@ -240,8 +241,9 @@ def classification_model_2d(blocks=(1, 2, 3, 4)):
     inputs = Input((None, 2))
 
     # Convolutions - run through twice, flipping x and y dimensions on second run
-    c1 = GlobalMaxPooling1D()(conv_blocks(dimensions=2, blocks=blocks)(inputs))
-    c2 = GlobalMaxPooling1D()(conv_blocks(dimensions=2, blocks=blocks)(reverse(inputs, axis=[2])))
+    conv = conv_blocks(dimensions=2, blocks=blocks)
+    c1 = GlobalMaxPooling1D()(conv(inputs))
+    c2 = GlobalMaxPooling1D()(conv(reverse(inputs, axis=[2])))
     c = tf.math.maximum(c1, c2)  # max pool outputs from the two passes
 
     # Dense layers
@@ -281,8 +283,9 @@ def segmentation_model_2d(blocks=(1, 2, 3, 4)):
     inputs = Input((199, 2))
 
     # Convolutions - run through twice, flipping x and y dimensions on second run
-    c1 = conv_blocks_for_seg(dimensions=2, blocks=blocks, length=199)(inputs)
-    c2 = conv_blocks_for_seg(dimensions=2, blocks=blocks, length=199)(reverse(inputs, axis=[2]))
+    conv = conv_blocks_for_seg(dimensions=2, blocks=blocks, length=199)
+    c1 = conv(inputs)
+    c2 = conv(reverse(inputs, axis=[2]))
     c = tf.math.add(c1, c2)  # add outputs from the two passes
 
     # 1x1 filter
