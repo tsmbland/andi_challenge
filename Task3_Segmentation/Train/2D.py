@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../..')
 
-from andi_funcs import track_generator_segmentation, import_tracks, import_labels, package_tracks
+from andi_funcs import TrackGeneratorSegmentation, import_tracks, import_labels, package_tracks
 from models import segmentation_model_2d
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.callbacks import ModelCheckpoint
@@ -19,11 +19,11 @@ tracks_test = package_tracks(import_tracks('../../Datasets/Test/task3.txt')[1], 
 model = segmentation_model_2d()
 model.compile(optimizer=Adam(learning_rate=0.001), loss='sparse_categorical_crossentropy', metrics=['accuracy'])
 model.summary()
-history = model.fit(track_generator_segmentation(dimensions=2, n=32), steps_per_epoch=200, epochs=200,
+history = model.fit(TrackGeneratorSegmentation(batches=200, batch_size=32, dimensions=2), epochs=200,
                     callbacks=[
                         ModelCheckpoint(filepath='../Models/2D.h5', monitor='val_accuracy', save_best_only=True,
                                         mode='max')],
-                    validation_data=(tracks_val, positions_val), use_multiprocessing=False)
+                    validation_data=(tracks_val, positions_val), use_multiprocessing=True, workers=16)
 
 # Save performance metrics
 np.savetxt('2D_accuracy.txt', history.history['accuracy'])

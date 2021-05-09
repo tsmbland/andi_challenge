@@ -1,6 +1,7 @@
 import numpy as np
 import andi
 import csv
+from tensorflow.keras.utils import Sequence
 
 """
 Dataset generators
@@ -24,6 +25,7 @@ def generate_tracks_regression(n, dimensions, min_T=5, max_T=1001):
 
     """
     # Create tracks
+    np.random.seed()  # prevents data duplication
     AD = andi.andi_datasets()
     X1, Y1, X2, Y2, X3, Y3 = AD.andi_dataset(N=n, min_T=min_T, max_T=max_T, tasks=[1], dimensions=[dimensions])
     exponents = np.array(Y1[dimensions - 1])
@@ -34,15 +36,21 @@ def generate_tracks_regression(n, dimensions, min_T=5, max_T=1001):
     return tracks_array, exponents
 
 
-def track_generator_regression(n, dimensions, min_T=5, max_T=1001):
-    """
-    Generator for generate_tracks_regression
+class TrackGeneratorRegression(Sequence):
+    def __init__(self, batches, batch_size, dimensions, min_T, max_T):
+        self.batches = batches
+        self.batch_size = batch_size
+        self.dimensions = dimensions
+        self.min_T = min_T
+        self.max_T = max_T
 
-    """
+    def __getitem__(self, item):
+        tracks, exponents = generate_tracks_regression(self.batch_size, dimensions=self.dimensions, min_T=self.min_T,
+                                                       max_T=self.max_T)
+        return tracks, exponents
 
-    while True:
-        tracks, exponents = generate_tracks_regression(n, dimensions=dimensions, min_T=min_T, max_T=max_T)
-        yield tracks, exponents
+    def __len__(self):
+        return self.batches
 
 
 def generate_tracks_classification(n, dimensions, min_T=5, max_T=1001):
@@ -62,6 +70,7 @@ def generate_tracks_classification(n, dimensions, min_T=5, max_T=1001):
     """
 
     # Create tracks
+    np.random.seed()
     AD = andi.andi_datasets()
     X1, Y1, X2, Y2, X3, Y3 = AD.andi_dataset(N=n, min_T=min_T, max_T=max_T, tasks=[2], dimensions=[dimensions])
     classes = np.array(Y2[dimensions - 1]).astype(int)
@@ -72,15 +81,21 @@ def generate_tracks_classification(n, dimensions, min_T=5, max_T=1001):
     return tracks_array, classes
 
 
-def track_generator_classification(n, dimensions, min_T=5, max_T=1001):
-    """
-    Generator for generate_tracks_classification
+class TrackGeneratorClassification(Sequence):
+    def __init__(self, batches, batch_size, dimensions, min_T, max_T):
+        self.batches = batches
+        self.batch_size = batch_size
+        self.dimensions = dimensions
+        self.min_T = min_T
+        self.max_T = max_T
 
-    """
+    def __getitem__(self, item):
+        tracks, classes = generate_tracks_classification(self.batch_size, dimensions=self.dimensions, min_T=self.min_T,
+                                                         max_T=self.max_T)
+        return tracks, classes
 
-    while True:
-        tracks, classes = generate_tracks_classification(n, dimensions=dimensions, min_T=min_T, max_T=max_T)
-        yield tracks, classes
+    def __len__(self):
+        return self.batches
 
 
 def generate_tracks_segmentation(n, dimensions):
@@ -98,6 +113,7 @@ def generate_tracks_segmentation(n, dimensions):
     """
 
     # Create tracks
+    np.random.seed()
     AD = andi.andi_datasets()
     X1, Y1, X2, Y2, X3, Y3 = AD.andi_dataset(N=n, tasks=[3], dimensions=[dimensions], min_T=200, max_T=201)
     positions = np.array(Y3[dimensions - 1])[:, 1].astype(int) - 1
@@ -108,15 +124,18 @@ def generate_tracks_segmentation(n, dimensions):
     return tracks_array, positions
 
 
-def track_generator_segmentation(n, dimensions):
-    """
-    Generator for generate_tracks_segmentation
+class TrackGeneratorSegmentation(Sequence):
+    def __init__(self, batches, batch_size, dimensions):
+        self.batches = batches
+        self.batch_size = batch_size
+        self.dimensions = dimensions
 
-    """
+    def __getitem__(self, item):
+        tracks, positions = generate_tracks_segmentation(self.batch_size, dimensions=self.dimensions)
+        return tracks, positions
 
-    while True:
-        tracks, positions = generate_tracks_segmentation(n, dimensions=dimensions)
-        yield tracks, positions
+    def __len__(self):
+        return self.batches
 
 
 """
@@ -287,5 +306,6 @@ To do:
 - early stopping
 - automatically detect max_T
 - order by track length during inference -> put through in batches
+- move some preprocessing to lambda layers
 
 """
