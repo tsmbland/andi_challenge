@@ -8,7 +8,7 @@ The models in this repository perform three tasks on 1D and 2D tracks, as set ou
 -	Task 2: classification of diffusion model
 -	Task 3: segmentation of trajectories
 
-The CNN architecture used here is based on that used in Granik et al., 2019 (ref below), and I thank the authors of that study for making their code freely available.
+The CNN architecture used here is based on that used in Granik et al., 2019 (ref below).
 As well as some minor changes to hyperparameters and model training (as outlined in the code), I've made some major modifications to the original methods which I believe improve performance and applicability to real data:
 - Consideration of tracks of all lengths (5-1000+ steps) with a single model 
 - Training models on tracks with variable signal to noise ratio (permitting inference without prior information about SNR)
