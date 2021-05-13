@@ -33,8 +33,8 @@ def conv_blocks(dimensions, blocks, length=None):
         block1 = Conv1D(f, 2, dilation_rate=8, padding='causal', activation='relu', kernel_initializer='he_normal')(
             block1)
         block1 = BatchNormalization()(block1)
-        x1_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block1 = Add()([x1_bypass, block1])
+        block1_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block1 = Add()([block1_bypass, block1])
     else:
         block1 = None
 
@@ -51,8 +51,8 @@ def conv_blocks(dimensions, blocks, length=None):
         block2 = Conv1D(f, 3, dilation_rate=8, padding='causal', activation='relu', kernel_initializer='he_normal')(
             block2)
         block2 = BatchNormalization()(block2)
-        x2_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block2 = Add()([x2_bypass, block2])
+        block2_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block2 = Add()([block2_bypass, block2])
     else:
         block2 = None
 
@@ -69,8 +69,8 @@ def conv_blocks(dimensions, blocks, length=None):
         block3 = Conv1D(f, 4, dilation_rate=8, padding='causal', activation='relu', kernel_initializer='he_normal')(
             block3)
         block3 = BatchNormalization()(block3)
-        x3_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block3 = Add()([x3_bypass, block3])
+        block3_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block3 = Add()([block3_bypass, block3])
     else:
         block3 = None
 
@@ -87,8 +87,8 @@ def conv_blocks(dimensions, blocks, length=None):
         block4 = Conv1D(f, 10, dilation_rate=8, padding='causal', activation='relu', kernel_initializer='he_normal')(
             block4)
         block4 = BatchNormalization()(block4)
-        x4_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block4 = Add()([x4_bypass, block4])
+        block4_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block4 = Add()([block4_bypass, block4])
     else:
         block4 = None
 
@@ -105,8 +105,8 @@ def conv_blocks(dimensions, blocks, length=None):
         block5 = Conv1D(f, 20, dilation_rate=8, padding='causal', activation='relu', kernel_initializer='he_normal')(
             block5)
         block5 = BatchNormalization()(block5)
-        x5_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block5 = Add()([x5_bypass, block5])
+        block5_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block5 = Add()([block5_bypass, block5])
     else:
         block5 = None
 
@@ -137,8 +137,8 @@ def conv_blocks_for_seg(dimensions, blocks, length=None):
         block1 = Conv1D(f, 3, dilation_rate=8, padding='same', activation='relu', kernel_initializer='he_normal')(
             block1)
         block1 = BatchNormalization()(block1)
-        x1_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block1 = Add()([x1_bypass, block1])
+        block1_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block1 = Add()([block1_bypass, block1])
     else:
         block1 = None
 
@@ -155,8 +155,8 @@ def conv_blocks_for_seg(dimensions, blocks, length=None):
         block2 = Conv1D(f, 5, dilation_rate=8, padding='same', activation='relu', kernel_initializer='he_normal')(
             block2)
         block2 = BatchNormalization()(block2)
-        x2_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block2 = Add()([x2_bypass, block2])
+        block2_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block2 = Add()([block2_bypass, block2])
     else:
         block2 = None
 
@@ -173,8 +173,8 @@ def conv_blocks_for_seg(dimensions, blocks, length=None):
         block3 = Conv1D(f, 7, dilation_rate=8, padding='same', activation='relu', kernel_initializer='he_normal')(
             block3)
         block3 = BatchNormalization()(block3)
-        x3_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block3 = Add()([x3_bypass, block3])
+        block3_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block3 = Add()([block3_bypass, block3])
     else:
         block3 = None
 
@@ -191,8 +191,8 @@ def conv_blocks_for_seg(dimensions, blocks, length=None):
         block4 = Conv1D(f, 15, dilation_rate=8, padding='same', activation='relu', kernel_initializer='he_normal')(
             block4)
         block4 = BatchNormalization()(block4)
-        x4_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
-        block4 = Add()([x4_bypass, block4])
+        block4_bypass = Conv1D(f, 1, activation='relu', kernel_initializer='he_normal')(inputs)
+        block4 = Add()([block4_bypass, block4])
     else:
         block4 = None
 
