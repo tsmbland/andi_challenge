@@ -1,7 +1,7 @@
 # Convolutional neural networks for inference and segmentation of anomalous diffusion trajectories
 
 This repository contains code for the analysis of single particle tracking data for characterisation of anomalous diffusion, using convolutional neural networks (CNNs). 
-Submitted to the [Anomalous Diffusion (AnDi) Challenge](https://arxiv.org/abs/2105.06766).
+Submitted to the [Anomalous Diffusion (AnDi) Challenge](https://arxiv.org/abs/2003.12036).
 
 The models in this repository perform three tasks on 1D and 2D tracks, as set out in the challenge:
 -	Task 1: inference of anomalous exponent
@@ -14,7 +14,7 @@ As well as some minor changes to hyperparameters and model training (as outlined
 - Training models on tracks with variable signal to noise ratio (permitting inference without prior information about SNR)
 - Segmentation of trajectories switching between diffusion modes (currently limited to single length tracks with one switch). NB. this uses a slightly different CNN architecture (regular convolutions instead of causal convolutions)
 
-Please see the AnDi Challenge follow up paper (linked above) for a full description of the method and a thorough assessment of it's performance.
+Please see the AnDi Challenge follow-up paper (preprint available [here](https://arxiv.org/abs/2105.06766)) for a full description of the method and a thorough assessment of its performance (look out for team J!).
 
 Note: the code in this repository has been modified and improved somewhat since the original challenge (mostly just to improve usability). For the exact code and models used in the original challenge, please see [this fork](https://github.com/AnDiChallenge/AnDi2020_TeamJ_FCI). 
 
@@ -46,7 +46,7 @@ Training data is generated on-the-fly during training, and does not need to be g
 ## Training models
 
 To train models, run the scripts in the Train folder for the respective task (E.g. Task1_Exponent/Train/1D.py for task 1 in 1D).
-Pre-trained models included as .h5 files in the Models folder for each task.
+Pre-trained models are included as .h5 files in the Models folder for each task.
 
 
 ## Analysing challenge data
@@ -54,7 +54,7 @@ Pre-trained models included as .h5 files in the Models folder for each task.
 The repository includes three scripts for analysing challenge data in the ‘Challenge’ folder, named Task1.py, Task2.py and Task3.py for the three tasks. 
 To perform analysis, run these scripts, specifying the path to the data folder at the top of the file. 
 
-Non-challenge data (e.g. real data) can be analysed in a similar way!
+Non-challenge data (e.g. real data) can be analysed in a similar way.
 
 
 ## Notebooks
@@ -69,6 +69,10 @@ There are four notebooks in the Notebooks folder that lay out some of the featur
 
 ## References
 
-S. Bai, J. Z. Kolter, and V. Koltun, “An empirical evaluation of generic convolutional and recurrent networks for sequence modeling”, arXiv preprint arXiv:1803.01271 (2018)
+Bai, S., Kolter, J.Z., and Koltun, V. (2018). An empirical evaluation of generic convolutional and recurrent networks for sequence modeling. ArXiv.
 
 Granik, N., Weiss, L.E., Nehme, E., Levin, M., Chein, M., Perlson, E., Roichman, Y., and Shechtman, Y. (2019). Single-Particle Diffusion Characterization by Deep Learning. Biophys. J. 117, 185–192
+
+Muñoz-Gil, G., Volpe, G., García-March, M.A., Metzler, R., Lewenstein, M., and Manzo, C. (2020). The anomalous diffusion challenge: single trajectory characterisation as a competition. ArXiv
+
+Muñoz-Gil, G., Volpe, G., Garcia-March, M.A., Aghion, E., Argun, A., Hong, C.B., Bland, T., Bo, S., Conejero, J.A., Firbas, N., et al. (2021). Objective comparison of methods to decode anomalous diffusion. ArXiv
