@@ -1,20 +1,22 @@
-# andi_challenge
+# Convolutional neural networks for inference and segmentation of anomalous diffusion trajectories
 
 This repository contains code for the analysis of single particle tracking data for characterisation of anomalous diffusion, using convolutional neural networks (CNNs). 
-Submitted to the [Anomalous Diffusion (AnDi) Challenge](http://www.andi-challenge.org/).
+Submitted to the [Anomalous Diffusion (AnDi) Challenge](https://arxiv.org/abs/2105.06766).
 
 The models in this repository perform three tasks on 1D and 2D tracks, as set out in the challenge:
 -	Task 1: inference of anomalous exponent
 -	Task 2: classification of diffusion model
 -	Task 3: segmentation of trajectories
 
-The CNN architecture used here is based on that used in Granik et al., 2019 (ref below).
+The CNN architecture used here is adapted from that used in [Granik et al., 2019](https://www.sciencedirect.com/science/article/pii/S0006349519305041/), which is itself based on a CNN architecture described in [Bai et al., 2018](https://arxiv.org/abs/1803.01271/).
 As well as some minor changes to hyperparameters and model training (as outlined in the code), I've made some major modifications to the original methods which I believe improve performance and applicability to real data:
 - Consideration of tracks of all lengths (5-1000+ steps) with a single model 
 - Training models on tracks with variable signal to noise ratio (permitting inference without prior information about SNR)
-- Segmentation of trajectories switching between diffusion modes (currently limited to single length tracks with one switch, but I plan to extend this)
+- Segmentation of trajectories switching between diffusion modes (currently limited to single length tracks with one switch). NB. this uses a slightly different CNN architecture (regular convolutions instead of causal convolutions)
 
-Note: the code in this repository has been modified and improved somewhat since the original challenge. For the exact code and models used in the original challenge, please see [this fork](https://github.com/AnDiChallenge/AnDi2020_TeamJ_FCI). 
+Please see the AnDi Challenge follow up paper (linked above) for a full description of the method and a thorough assessment of it's performance.
+
+Note: the code in this repository has been modified and improved somewhat since the original challenge (mostly just to improve usability). For the exact code and models used in the original challenge, please see [this fork](https://github.com/AnDiChallenge/AnDi2020_TeamJ_FCI). 
 
 ## Installation
 
@@ -55,6 +57,18 @@ To perform analysis, run these scripts, specifying the path to the data folder a
 Non-challenge data (e.g. real data) can be analysed in a similar way!
 
 
+## Notebooks
+
+There are four notebooks in the Notebooks folder that lay out some of the features of this repository and provide further instructions on performing analysis:
+
+- [Notebook 1](Notebooks/trajectory_preprocessing.ipynb) - Generating and preprocessing trajectories
+- [Notebook 2](Notebooks/exponent_inference.ipynb) - Inference of anomalous exponent using trained CNNs
+- [Notebook 3](Notebooks/model_classification.ipynb) - Inference of diffusion model using trained CNNs
+- [Notebook 4](Notebooks/segmentation.ipynb) - Segmentation of trajectories using trained CNNs
+
+
 ## References
+
+S. Bai, J. Z. Kolter, and V. Koltun, “An empirical evaluation of generic convolutional and recurrent networks for sequence modeling”, arXiv preprint arXiv:1803.01271 (2018)
 
 Granik, N., Weiss, L.E., Nehme, E., Levin, M., Chein, M., Perlson, E., Roichman, Y., and Shechtman, Y. (2019). Single-Particle Diffusion Characterization by Deep Learning. Biophys. J. 117, 185–192
