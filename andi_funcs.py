@@ -31,7 +31,7 @@ def generate_tracks_regression(n, dimensions, min_T=5, max_T=1001):
     exponents = np.array(Y1[dimensions - 1])
     tracks = X1[dimensions - 1]
 
-    # Package into array
+    # Package into array and preprocess
     tracks_array = package_tracks(tracks=tracks, max_T=max_T, dimensions=dimensions)
     return tracks_array, exponents
 
@@ -76,7 +76,7 @@ def generate_tracks_classification(n, dimensions, min_T=5, max_T=1001):
     classes = np.array(Y2[dimensions - 1]).astype(int)
     tracks = X2[dimensions - 1]
 
-    # Package into array
+    # Package into array and preprocess
     tracks_array = package_tracks(tracks=tracks, max_T=max_T, dimensions=dimensions)
     return tracks_array, classes
 
@@ -119,7 +119,7 @@ def generate_tracks_segmentation(n, dimensions):
     positions = np.array(Y3[dimensions - 1])[:, 1].astype(int) - 1
     tracks = X3[dimensions - 1]
 
-    # Package into array
+    # Package into array and preprocess
     tracks_array = package_tracks(tracks=tracks, max_T=200, dimensions=dimensions)
     return tracks_array, positions
 
@@ -302,10 +302,18 @@ def import_labels(direc):
 
 
 """
-To do:
-- early stopping
-- automatically detect max_T
-- order by track length during inference -> put through in batches
-- move some preprocessing to lambda layers
+Other
 
 """
+
+
+def rolling_ave(array, window):
+    """
+    Apply a rolling average to a 1D array. Rolling average window specified by window parameter. Can be useful to apply
+    to output of segmentation CNN, but not strictly necessary
+
+    """
+
+    array_padded = np.c_[array[:, :int(window / 2)][:, :-1], array, array[:, -int(window / 2):][:, :-1]]
+    cumsum = np.cumsum(array_padded, axis=1)
+    return (cumsum[:, window:] - cumsum[:, :-window]) / window
