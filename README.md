@@ -1,4 +1,4 @@
-# Convolutional neural networks for inference and segmentation of anomalous diffusion trajectories
+# Convolutional neural networks for characterisation and segmentation of anomalous diffusion trajectories
 
 This repository contains code for the analysis of single particle tracking data for characterisation of anomalous diffusion, using convolutional neural networks (CNNs). 
 Submitted to the [Anomalous Diffusion (AnDi) Challenge](https://arxiv.org/abs/2003.12036).
