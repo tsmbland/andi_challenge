@@ -2,6 +2,7 @@
 
 [![CC BY 4.0][cc-by-shield]][cc-by]
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tsmbland/andi_challenge/HEAD?filepath=%2FNotebooks/index.ipynb)
 
 
 This repository contains code for the analysis of single particle tracking data for characterisation of anomalous diffusion, using convolutional neural networks (CNNs). 
@@ -31,12 +32,7 @@ Clone the repository:
     
 Create conda environment:
 
-    conda create -n andi python=3.7
-    conda activate andi
-
-Install packages:
-
-    pip install -r requirements.txt
+    conda env create -f environment.yml
 
 
 ## Generating datasets
@@ -69,6 +65,8 @@ There are four notebooks in the Notebooks folder that lay out some of the featur
 - [Notebook 2](Notebooks/exponent_inference.ipynb) - Inference of anomalous exponent using trained CNNs
 - [Notebook 3](Notebooks/model_classification.ipynb) - Inference of diffusion model using trained CNNs
 - [Notebook 4](Notebooks/segmentation.ipynb) - Segmentation of trajectories using trained CNNs
+
+Notebooks can be run in the cloud by clicking the 'launch binder' button at the top.
 
 
 ## References
