@@ -1,5 +1,9 @@
 # Convolutional neural networks for characterisation and segmentation of anomalous diffusion trajectories
 
+[![CC BY 4.0][cc-by-shield]][cc-by]
+![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white)
+
+
 This repository contains code for the analysis of single particle tracking data for characterisation of anomalous diffusion, using convolutional neural networks (CNNs). 
 Submitted to the [Anomalous Diffusion (AnDi) Challenge](https://arxiv.org/abs/2003.12036).
 
@@ -14,7 +18,7 @@ As well as some minor changes to hyperparameters and model training (as outlined
 - Training models on tracks with variable signal to noise ratio (permitting inference without prior information about SNR)
 - Segmentation of trajectories switching between diffusion modes (currently limited to single length tracks with one switch). NB. this uses a slightly different CNN architecture (regular convolutions instead of causal convolutions)
 
-Please see the AnDi Challenge follow-up paper (preprint available [here](https://arxiv.org/abs/2105.06766)) for a full description of the method and a thorough assessment of its performance (look out for team J!).
+Please see the AnDi Challenge follow-up paper (available [here](https://www.nature.com/articles/s41467-021-26320-w)) for a full description of the method and a thorough assessment of its performance (look out for team J!).
 
 Note: the code in this repository has been modified and improved somewhat since the original challenge (mostly just to improve usability). For the exact code and models used in the original challenge, please see [this fork](https://github.com/AnDiChallenge/AnDi2020_TeamJ_FCI). 
 
@@ -75,4 +79,15 @@ Granik, N., Weiss, L.E., Nehme, E., Levin, M., Chein, M., Perlson, E., Roichman,
 
 Muñoz-Gil, G., Volpe, G., García-March, M.A., Metzler, R., Lewenstein, M., and Manzo, C. (2020). The anomalous diffusion challenge: single trajectory characterisation as a competition. ArXiv
 
-Muñoz-Gil, G., Volpe, G., Garcia-March, M.A., Aghion, E., Argun, A., Hong, C.B., Bland, T., Bo, S., Conejero, J.A., Firbas, N., et al. (2021). Objective comparison of methods to decode anomalous diffusion. ArXiv
+Muñoz-Gil, G., Volpe, G., Garcia-March, M.A. et al. Objective comparison of methods to decode anomalous diffusion. Nat Commun 12, 6253 (2021).
+
+## License
+
+This work is licensed under a
+[Creative Commons Attribution 4.0 International License][cc-by].
+
+[![CC BY 4.0][cc-by-image]][cc-by]
+
+[cc-by]: http://creativecommons.org/licenses/by/4.0/
+[cc-by-image]: https://i.creativecommons.org/l/by/4.0/88x31.png
+[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
