@@ -65,10 +65,10 @@ Non-challenge data (e.g. real data) can be analysed in a similar way.
 
 There are four notebooks in the Notebooks folder that lay out some of the features of this repository and provide further instructions on performing analysis:
 
-- [Notebook 1](Notebooks/trajectory_preprocessing.ipynb) - Generating and preprocessing trajectories
-- [Notebook 2](Notebooks/exponent_inference.ipynb) - Inference of anomalous exponent using trained CNNs
-- [Notebook 3](Notebooks/model_classification.ipynb) - Inference of diffusion model using trained CNNs
-- [Notebook 4](Notebooks/segmentation.ipynb) - Segmentation of trajectories using trained CNNs
+- [Notebook 1](https://nbviewer.org/github/tsmbland/andi_challenge/blob/master/Notebooks/trajectory_preprocessing.ipynb) - Generating and preprocessing trajectories
+- [Notebook 2](https://nbviewer.org/github/tsmbland/andi_challenge/blob/master/Notebooks/exponent_inference.ipynb) - Inference of anomalous exponent using trained CNNs
+- [Notebook 3](https://nbviewer.org/github/tsmbland/andi_challenge/blob/master/Notebooks/model_classification.ipynb) - Inference of diffusion model using trained CNNs
+- [Notebook 4](https://nbviewer.org/github/tsmbland/andi_challenge/blob/master/Notebooks/segmentation.ipynb) - Segmentation of trajectories using trained CNNs
 
 Notebooks can be run in the cloud by clicking the 'launch binder' button at the top.
 
