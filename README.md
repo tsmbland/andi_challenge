@@ -2,8 +2,6 @@
 
 [![CC BY 4.0][cc-by-shield]][cc-by]
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/tsmbland/andi_challenge/HEAD?filepath=%2FNotebooks/index.ipynb)
-
 
 This repository contains code for the analysis of single particle tracking data for characterisation of anomalous diffusion, using convolutional neural networks (CNNs). 
 Submitted to the [Anomalous Diffusion (AnDi) Challenge](https://arxiv.org/abs/2003.12036).
@@ -65,12 +63,19 @@ Non-challenge data (e.g. real data) can be analysed in a similar way.
 
 There are four notebooks in the Notebooks folder that lay out some of the features of this repository and provide further instructions on performing analysis:
 
-- [Notebook 1](https://nbviewer.org/github/tsmbland/andi_challenge/blob/master/Notebooks/trajectory_preprocessing.ipynb) - Generating and preprocessing trajectories
-- [Notebook 2](https://nbviewer.org/github/tsmbland/andi_challenge/blob/master/Notebooks/exponent_inference.ipynb) - Inference of anomalous exponent using trained CNNs
-- [Notebook 3](https://nbviewer.org/github/tsmbland/andi_challenge/blob/master/Notebooks/model_classification.ipynb) - Inference of diffusion model using trained CNNs
-- [Notebook 4](https://nbviewer.org/github/tsmbland/andi_challenge/blob/master/Notebooks/segmentation.ipynb) - Segmentation of trajectories using trained CNNs
+- Notebook 1 <a target="_blank" href="https://colab.research.google.com/github/tsmbland/andi_challenge/blob/master/Notebooks/trajectory_preprocessing.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" height=15/>
+</a> - Generating and preprocessing trajectories
+- Notebook 2 <a target="_blank" href="https://colab.research.google.com/github/tsmbland/andi_challenge/blob/master/Notebooks/exponent_inference.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" height=15/>
+</a> - Inference of anomalous exponent using trained CNNs
+- Notebook 3 <a target="_blank" href="https://colab.research.google.com/github/tsmbland/andi_challenge/blob/master/Notebooks/model_classification.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" height=15/>
+</a>- Inference of diffusion model using trained CNNs
+- Notebook 4 <a target="_blank" href="https://colab.research.google.com/github/tsmbland/andi_challenge/blob/master/Notebooks/segmentation.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" height=15/>
+</a>- Segmentation of trajectories using trained CNNs
 
-Notebooks can be run in the cloud by clicking the 'launch binder' button at the top.
 
 
 ## References
