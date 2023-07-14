@@ -12,7 +12,7 @@ The models in this repository perform three tasks on 1D and 2D tracks, as set ou
 -	Task 3: segmentation of trajectories
 
 The CNN architecture used here is adapted from that used in [Granik et al., 2019](https://www.sciencedirect.com/science/article/pii/S0006349519305041/), which is itself based on a CNN architecture described in [Bai et al., 2018](https://arxiv.org/abs/1803.01271/).
-As well as some minor changes to hyperparameters and model training (as outlined in the code), I've made some major modifications to the original methods which I believe improve performance and applicability to real data:
+As well as some minor changes to hyperparameters and model training (as outlined in the code), I've made some major modifications to the original methods which improve performance and applicability to real data:
 - Consideration of tracks of all lengths (5-1000+ steps) with a single model 
 - Training models on tracks with variable signal to noise ratio (permitting inference without prior information about SNR)
 - Segmentation of trajectories switching between diffusion modes (currently limited to single length tracks with one switch). NB. this uses a slightly different CNN architecture (regular convolutions instead of causal convolutions)
