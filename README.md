@@ -2,6 +2,7 @@
 
 [![CC BY 4.0][cc-by-shield]][cc-by]
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=flat&logo=tensorflow&logoColor=white)
+[![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?logo=anaconda)](https://docs.conda.io/en/latest/)
 
 This repository contains code for the analysis of single particle tracking data for characterisation of anomalous diffusion, using convolutional neural networks (CNNs). 
 Submitted to the [Anomalous Diffusion (AnDi) Challenge](https://arxiv.org/abs/2003.12036).
